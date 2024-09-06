@@ -1,0 +1,16 @@
+services:
+  vllm-development:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+      target: dev
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: bash -c "sleep infinity"
+    volumes:
+      - ..:/workspace
